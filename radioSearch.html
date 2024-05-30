@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search App</title>
+</head>
+<body>
+    <h1>Search in Files</h1>
+    <form id="search-form">
+        <input type="text" id="search-term" name="search-term" placeholder="Enter search term" required>
+        <button type="submit">Search</button>
+    </form>
+    <h2>Results:</h2>
+    <pre id="results"></pre>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search-term').value;
+            const response = await fetch(`/search?term=${encodeURIComponent(searchTerm)}`);
+            const results = await response.text();
+            document.getElementById('results').innerText = results;
+        });
+    </script>
+</body>
+</html>
